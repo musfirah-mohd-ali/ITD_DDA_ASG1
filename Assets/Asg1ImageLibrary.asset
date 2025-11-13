@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 451727402998270375
       m_GuidHigh: 11079701066790115355
-    m_Size: {x: 0.1, y: 0.1}
+    m_Size: {x: 0.5, y: 0.5}
     m_SpecifySize: 1
     m_Name: ock
     m_Texture: {fileID: 0}
