@@ -2,12 +2,32 @@ using UnityEngine;
 
 public class ARObjectBehaviour : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer[] meshRenderersToToggle;
+    [SerializeField]
+    private MeshRenderer meshRendererToToggle;
 
-    public void ToggleMeshes()
+    [SerializeField]
+    private AudioSource meshDisableSound;
+    [SerializeField]
+    private AudioClip disableSoundClip;
+
+    public void ToggleMeshRenderer()
     {
-        foreach (MeshRenderer r in meshRenderersToToggle)
-            r.enabled = !r.enabled;
-    }
+        bool newState = !meshRendererToToggle.enabled;
+        meshRendererToToggle.enabled = newState;
 
+        // Play sound ONLY when disabling
+        if (newState == false)
+        {
+            if (meshDisableSound != null)
+            {
+                meshDisableSound.PlayOneShot(disableSoundClip);
+            }
+            else
+            {
+                Debug.LogWarning("No AudioSource assigned for disable sound.");
+            }
+        }
+
+        Debug.Log("Mesh Renderer is now: " + (meshRendererToToggle.enabled ? "Enabled" : "Disabled"));
+    }
 }
