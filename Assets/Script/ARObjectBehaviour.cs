@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class ARObjectBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    public MeshRenderer meshRendererToToggle;
-    public void ToggleMeshRenderer()
+    [SerializeField] private MeshRenderer[] meshRenderersToToggle;
+
+    public void ToggleMeshes()
     {
-        meshRendererToToggle.enabled = !meshRendererToToggle.enabled;
+        foreach (MeshRenderer r in meshRenderersToToggle)
+            r.enabled = !r.enabled;
     }
+
 }

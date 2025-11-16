@@ -10,20 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
-  m_Name: Asg1ImageLibrary
+  m_Name: ITD_DDA_ImageLib
   m_EditorClassIdentifier: 
-  m_GuidLow: 5529098830012146935
-  m_GuidHigh: 8974063842250973622
+  m_GuidLow: 5006431683734757986
+  m_GuidHigh: 6808925964275939983
   m_DataStore:
     m_Storage: []
   m_Images:
   - m_SerializedGuid:
-      m_GuidLow: 4835602568789427130
-      m_GuidHigh: 9533606409584398749
+      m_GuidLow: 5380945015448910681
+      m_GuidHigh: 3932789588313771181
     m_SerializedTextureGuid:
       m_GuidLow: 451727402998270375
       m_GuidHigh: 11079701066790115355
     m_Size: {x: 0.5, y: 0.5}
     m_SpecifySize: 1
-    m_Name: ock
+    m_Name: curryPuffLP
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5640017331499208589
+      m_GuidHigh: 3109484301737885097
+    m_SerializedTextureGuid:
+      m_GuidLow: 16700562192221014611
+      m_GuidHigh: 13692609735117555753
+    m_Size: {x: 0.5, y: 0.5}
+    m_SpecifySize: 1
+    m_Name: giftBoxLP
     m_Texture: {fileID: 0}
