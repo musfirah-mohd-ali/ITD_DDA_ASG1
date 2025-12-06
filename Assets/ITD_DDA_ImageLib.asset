@@ -37,3 +37,13 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: giftBoxLP
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5615587973132816188
+      m_GuidHigh: 10949963280040164514
+    m_SerializedTextureGuid:
+      m_GuidLow: 14601818663323757008
+      m_GuidHigh: 8383002927433106072
+    m_Size: {x: 0.1, y: 0.1}
+    m_SpecifySize: 1
+    m_Name: ockQR
+    m_Texture: {fileID: 0}

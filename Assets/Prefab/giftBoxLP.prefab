@@ -52,7 +52,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2293836457122198067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRendererToToggle: {fileID: 348365323666478054}
+  meshDisableSound: {fileID: 0}
+  disableSoundClip: {fileID: 0}
 --- !u!114 &1319655460044800483
 MonoBehaviour:
   m_ObjectHideFlags: 0
