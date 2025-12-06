@@ -1,33 +1,68 @@
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
-public class QRSpawn : MonoBehaviour
+public class QRFlow : MonoBehaviour
 {
-    public ARTrackedImageManager imageManager; // the AR image tracker on Session Origin
-    public GameObject giftBoxPrefab; // the box i wanna spawn when QR detected
+    public ARTrackedImageManager imageManager;
+    public GameObject giftBox;
+    public GameObject collectible;
+    public GameObject openButton;
 
-    private GameObject spawnedGiftBox; // so it doesnt spawn 39392 duplicates lol
+    private bool qrDetected = false;
 
-    private void OnEnable()
+    void Start()
     {
-        trackedImageManager.trackedImagesChanged += OnImageChanged;
+        // hide everything at start
+        giftBox.SetActive(false);
+        collectible.SetActive(false);
+        openButton.SetActive(false);
     }
 
-    private void OnDisable()
+    void OnEnable()
     {
-        trackedImageManager.trackedImagesChanged -= OnImageChanged;
+        imageManager.trackedImagesChanged += OnImageChanged;
     }
 
-    void OnImageChanged(ARTrackedImagesChangedEventArgs eventArgs)
+    void OnDisable()
     {
-        foreach (var trackedImage in eventArgs.added)
-            UpdateImage(trackedImage);
-
-        foreach (var trackedImage in eventArgs.updated)
-            UpdateImage(trackedImage);
-
-        foreach (var trackedImage in eventArgs.removed)
-            UpdateImage(trackedImage);
+        imageManager.trackedImagesChanged -= OnImageChanged;
     }
 
+    void OnImageChanged(ARTrackedImagesChangedEventArgs args)
+    {
+        foreach (var trackedImage in args.added)
+        {
+            HandleQR(trackedImage);
+        }
+
+        foreach (var trackedImage in args.updated)
+        {
+            HandleQR(trackedImage);
+        }
+    }
+
+    void HandleQR(ARTrackedImage trackedImage)
+    {
+        if (trackedImage.referenceImage.name != "ockQR") return;
+
+        // QR is detected for the first time
+        if (!qrDetected && trackedImage.trackingState == TrackingState.Tracking)
+        {
+            qrDetected = true;
+
+            // spawn box on QR position
+            giftBox.transform.position = trackedImage.transform.position;
+            giftBox.transform.rotation = trackedImage.transform.rotation;
+            giftBox.SetActive(true);
+            openButton.SetActive(true);
+        }
+    }
+
+    public void OpenGift()
+    {
+        giftBox.SetActive(false);
+        openButton.SetActive(false);
+        collectible.SetActive(true);
+    }
 }

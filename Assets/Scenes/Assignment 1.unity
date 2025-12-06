@@ -3370,7 +3370,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_SerializedLibrary: {fileID: 11400000, guid: eaf183522b231c14cabd4b84d2e133eb, type: 2}
-  m_MaxNumberOfMovingImages: 1
+  m_MaxNumberOfMovingImages: 3
   m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &583206218
 MonoBehaviour:
@@ -3401,7 +3401,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageManager: {fileID: 583206213}
-  giftBoxPrefab: {fileID: 801772245}
+  giftBox: {fileID: 801772245}
+  collectible: {fileID: 1686434233}
+  openButton: {fileID: 810029414}
 --- !u!1 &589593864
 GameObject:
   m_ObjectHideFlags: 0
@@ -4687,6 +4689,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!23 &801772254 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 348365323666478054, guid: 0f97c9d44a8338141aec3b9c7d9802b3, type: 3}
+  m_PrefabInstance: {fileID: 3869028930084880653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &810029414
 GameObject:
   m_ObjectHideFlags: 0
@@ -4700,12 +4707,12 @@ GameObject:
   - component: {fileID: 810029417}
   - component: {fileID: 810029416}
   m_Layer: 0
-  m_Name: Button
+  m_Name: OpenMe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &810029415
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5437,9 +5444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a70599412dc8944bcadfcc7fd39c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRendererToToggle: {fileID: 0}
-  meshDisableSound: {fileID: 0}
-  disableSoundClip: {fileID: 0}
+  meshRendererToToggle: {fileID: 801772254}
+  meshDisableSound: {fileID: 801772253}
+  disableSoundClip: {fileID: 8300000, guid: 16fba6d30ed741d4a9fdd6e79ee2f3ac, type: 3}
 --- !u!1 &1119443512
 GameObject:
   m_ObjectHideFlags: 0
@@ -7119,6 +7126,11 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!1 &1686434233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8602306114148616896, guid: 51bbba8ef8a7a0243ba1bfa099e72d77, type: 3}
+  m_PrefabInstance: {fileID: 3204933577193880583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1766409465
 GameObject:
   m_ObjectHideFlags: 0
@@ -8966,7 +8978,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1400525094026176030, guid: 51bbba8ef8a7a0243ba1bfa099e72d77, type: 3}
   m_PrefabInstance: {fileID: 3204933577193880583}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1686434233}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99a70599412dc8944bcadfcc7fd39c1e, type: 3}
