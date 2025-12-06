@@ -13,7 +13,6 @@ public class QRFlow : MonoBehaviour
 
     void Start()
     {
-        // hide everything at start
         giftBox.SetActive(false);
         collectible.SetActive(false);
         openButton.SetActive(false);
@@ -46,15 +45,15 @@ public class QRFlow : MonoBehaviour
     {
         if (trackedImage.referenceImage.name != "ockQR") return;
 
-        // QR is detected for the first time
         if (!qrDetected && trackedImage.trackingState == TrackingState.Tracking)
         {
             qrDetected = true;
 
-            // spawn box on QR position
+            // Spawn gift box 20cm in front of camera
             Transform cam = Camera.main.transform;
             giftBox.transform.position = cam.position + cam.forward * 0.2f;
-            giftBox.transform.rotation = Quaternion.LookRotation(cam.forward);
+            giftBox.transform.rotation = cam.rotation;
+
             giftBox.SetActive(true);
             openButton.SetActive(true);
         }
@@ -66,5 +65,4 @@ public class QRFlow : MonoBehaviour
         openButton.SetActive(false);
         collectible.SetActive(true);
     }
-
 }
