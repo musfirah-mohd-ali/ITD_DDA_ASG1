@@ -4581,17 +4581,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2293836457122198067, guid: 0f97c9d44a8338141aec3b9c7d9802b3, type: 3}
   m_PrefabInstance: {fileID: 3869028930084880653}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &801772250 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -8540226253382184744, guid: 0f97c9d44a8338141aec3b9c7d9802b3, type: 3}
-  m_PrefabInstance: {fileID: 3869028930084880653}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801772245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99a70599412dc8944bcadfcc7fd39c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &801772253
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4777,21 +4766,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3204933577193880584}
-        m_TargetAssemblyTypeName: ARObjectBehaviour, Assembly-CSharp
-        m_MethodName: ToggleMeshRenderer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 801772250}
-        m_TargetAssemblyTypeName: ARObjectBehaviour, Assembly-CSharp
-        m_MethodName: ToggleMeshRenderer
+      - m_Target: {fileID: 1072261421}
+        m_TargetAssemblyTypeName: GiftBoxOpener, Assembly-CSharp
+        m_MethodName: OpenBox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5329,6 +5306,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969534803}
   m_CullTransparentMesh: 1
+--- !u!1 &975601702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 975601704}
+  - component: {fileID: 975601703}
+  m_Layer: 0
+  m_Name: gameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &975601703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975601702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f8dee490f48e1746a5606162d7fbf8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  giftBoxPrefab: {fileID: 801772245}
+  openButton: {fileID: 810029414}
+  opener: {fileID: 1072261421}
+--- !u!4 &975601704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975601702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4294598, y: 0.0044065462, z: 0.15550438}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1072261415
 GameObject:
   m_ObjectHideFlags: 0
@@ -5342,6 +5366,7 @@ GameObject:
   - component: {fileID: 1072261418}
   - component: {fileID: 1072261417}
   - component: {fileID: 1072261420}
+  - component: {fileID: 1072261421}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -5447,6 +5472,20 @@ MonoBehaviour:
   meshRendererToToggle: {fileID: 801772254}
   meshDisableSound: {fileID: 801772253}
   disableSoundClip: {fileID: 8300000, guid: 16fba6d30ed741d4a9fdd6e79ee2f3ac, type: 3}
+--- !u!114 &1072261421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072261415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2218273f670eda41bec3aa2f25064f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectiblePrefab: {fileID: 1686434233}
+  openButton: {fileID: 810029414}
 --- !u!1 &1119443512
 GameObject:
   m_ObjectHideFlags: 0
@@ -8973,17 +9012,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51bbba8ef8a7a0243ba1bfa099e72d77, type: 3}
---- !u!114 &3204933577193880584 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1400525094026176030, guid: 51bbba8ef8a7a0243ba1bfa099e72d77, type: 3}
-  m_PrefabInstance: {fileID: 3204933577193880583}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686434233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99a70599412dc8944bcadfcc7fd39c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3869028930084880653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9072,3 +9100,4 @@ SceneRoots:
   - {fileID: 3869028930084880653}
   - {fileID: 3204933577193880583}
   - {fileID: 1072261416}
+  - {fileID: 975601704}

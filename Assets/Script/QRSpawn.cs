@@ -52,8 +52,9 @@ public class QRFlow : MonoBehaviour
             qrDetected = true;
 
             // spawn box on QR position
-            giftBox.transform.position = trackedImage.transform.position;
-            giftBox.transform.rotation = trackedImage.transform.rotation;
+            Transform cam = Camera.main.transform;
+            giftBox.transform.position = cam.position + cam.forward * 0.2f;
+            giftBox.transform.rotation = Quaternion.LookRotation(cam.forward);
             giftBox.SetActive(true);
             openButton.SetActive(true);
         }
@@ -65,4 +66,5 @@ public class QRFlow : MonoBehaviour
         openButton.SetActive(false);
         collectible.SetActive(true);
     }
+
 }
