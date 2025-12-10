@@ -89,4 +89,5 @@ public class QRFlowAR : MonoBehaviour
 
         Debug.Log("Gift opened and collectible spawned!");
     }
+
 }
