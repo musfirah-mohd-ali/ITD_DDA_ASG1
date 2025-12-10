@@ -51,8 +51,9 @@ public class QRFlow : MonoBehaviour
             qrDetected = true;
             Debug.Log("QR Detected! Spawning gift box...");
 
-            // Spawn box 30 cm in front of camera
             Transform cam = Camera.main.transform;
+
+            // Spawn box 30 cm in front of camera
             Vector3 spawnPos = cam.position + cam.forward * 0.3f;
 
             // Rotation: upright, facing the player
@@ -60,15 +61,20 @@ public class QRFlow : MonoBehaviour
 
             // Spawn gift box
             currentGiftBox = Instantiate(giftBoxPrefab, spawnPos, spawnRot);
-            currentGiftBox.SetActive(true);
             currentGiftBox.transform.localScale = Vector3.one * 0.1f;
+
+            // Make Rigidbody kinematic so it doesn't float
+            Rigidbody rb = currentGiftBox.GetComponent<Rigidbody>();
+            if (rb != null) rb.isKinematic = true;
+
+            // Ensure it’s unparented so it won’t follow camera
+            currentGiftBox.transform.SetParent(null);
 
             if (openButton != null)
                 openButton.SetActive(true);
         }
     }
 
-    // Assign this to your Open Button OnClick
     public void OpenGift()
     {
         if (currentGiftBox == null) return;
@@ -86,7 +92,13 @@ public class QRFlow : MonoBehaviour
         collectible.transform.rotation = currentGiftBox.transform.rotation;
         collectible.transform.localScale = Vector3.one * 0.05f;
 
-        // Destroy the gift box
+        // Make Rigidbody kinematic for stability
+        Rigidbody rb = collectible.GetComponent<Rigidbody>();
+        if (rb != null) rb.isKinematic = true;
+
+        collectible.transform.SetParent(null);
+
+        // Destroy the gift box to simulate “opening”
         Destroy(currentGiftBox);
 
         Debug.Log("Gift opened! Spawned: " + chosenCollectible.name);
