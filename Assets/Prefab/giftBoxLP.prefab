@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4456795652988926491
+--- !u!1001 &1651908000451120709
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,18 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -60,10 +48,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -72,26 +56,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: giftBoxLP
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5361046936876529999}
+      addedObject: {fileID: 3230200511838495124}
   m_SourcePrefab: {fileID: 100100000, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
---- !u!1 &3537808238863304522 stripped
+--- !u!1 &1886348824193987348 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1040647fb32b5e047b4998b5b2911007, type: 3}
-  m_PrefabInstance: {fileID: 4456795652988926491}
+  m_PrefabInstance: {fileID: 1651908000451120709}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &5361046936876529999
+--- !u!54 &3230200511838495124
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3537808238863304522}
+  m_GameObject: {fileID: 1886348824193987348}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0

@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-public class QRFlowAR : MonoBehaviour
+public class QRFlow : MonoBehaviour
 {
     [Header("AR Components")]
     public ARTrackedImageManager trackedImageManager;
 
     [Header("Prefabs")]
     public GameObject giftBoxPrefab;
-    public GameObject collectiblePrefab;
+    public GameObject[] collectiblePrefabs;
 
     [Header("UI")]
     public GameObject openButton;
@@ -44,50 +44,51 @@ public class QRFlowAR : MonoBehaviour
 
     private void HandleQR(ARTrackedImage trackedImage)
     {
-        // Change "ockQR" to the exact name of your reference image in ARTrackedImageLibrary
-        if (trackedImage.referenceImage.name != "ockQR")
-            return;
+        if (trackedImage.referenceImage.name != "ockQR") return;
 
         if (!qrDetected && trackedImage.trackingState == TrackingState.Tracking)
         {
             qrDetected = true;
             Debug.Log("QR Detected! Spawning gift box...");
 
-            // Instantiate gift box in front of camera
-            if (giftBoxPrefab != null)
-            {
-                currentGiftBox = Instantiate(giftBoxPrefab);
-                Transform cam = Camera.main.transform;
-                currentGiftBox.transform.position = cam.position + cam.forward * 0.3f; // 30cm in front
-                currentGiftBox.transform.rotation = cam.rotation;
-                currentGiftBox.transform.localScale = Vector3.one * 0.1f;
-                currentGiftBox.SetActive(true);
-            }
+            // Spawn box 30 cm in front of camera
+            Transform cam = Camera.main.transform;
+            Vector3 spawnPos = cam.position + cam.forward * 0.3f;
+
+            // Rotation: upright, facing the player
+            Quaternion spawnRot = Quaternion.Euler(0, cam.eulerAngles.y, 0);
+
+            // Spawn gift box
+            currentGiftBox = Instantiate(giftBoxPrefab, spawnPos, spawnRot);
+            currentGiftBox.SetActive(true);
+            currentGiftBox.transform.localScale = Vector3.one * 0.1f;
 
             if (openButton != null)
                 openButton.SetActive(true);
         }
     }
 
-    // Assign this to your Open Button OnClick in Inspector
+    // Assign this to your Open Button OnClick
     public void OpenGift()
     {
-        if (currentGiftBox != null)
-            Destroy(currentGiftBox);
+        if (currentGiftBox == null) return;
 
         if (openButton != null)
             openButton.SetActive(false);
 
-        if (collectiblePrefab != null)
-        {
-            GameObject collectible = Instantiate(collectiblePrefab);
-            Transform cam = Camera.main.transform;
-            collectible.transform.position = cam.position + cam.forward * 0.3f;
-            collectible.transform.rotation = cam.rotation;
-            collectible.SetActive(true);
-        }
+        // Pick a random collectible
+        int index = Random.Range(0, collectiblePrefabs.Length);
+        GameObject chosenCollectible = collectiblePrefabs[index];
 
-        Debug.Log("Gift opened and collectible spawned!");
+        // Spawn collectible slightly above gift box
+        GameObject collectible = Instantiate(chosenCollectible);
+        collectible.transform.position = currentGiftBox.transform.position + new Vector3(0, 0.05f, 0);
+        collectible.transform.rotation = currentGiftBox.transform.rotation;
+        collectible.transform.localScale = Vector3.one * 0.05f;
+
+        // Destroy the gift box
+        Destroy(currentGiftBox);
+
+        Debug.Log("Gift opened! Spawned: " + chosenCollectible.name);
     }
-
 }
