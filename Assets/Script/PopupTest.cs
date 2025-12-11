@@ -8,6 +8,8 @@ public class PopupTest : MonoBehaviour
     public GameObject popup;
     private Coroutine popupCoroutine;
 
+    
+
 
     public void PopupTrigger()
     {

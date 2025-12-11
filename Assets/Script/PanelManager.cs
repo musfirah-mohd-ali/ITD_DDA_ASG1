@@ -3,22 +3,33 @@ using UnityEngine.UI;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
+using System.Text.RegularExpressions;
 using TMPro;
 
-public class PanelChanger : MonoBehaviour
+public class PanelManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject[] ActivePanels;
+    public GameObject HomePanel;
+    public GameObject DockPanel;
+    public PopupTest popup;
 
+
+    // Registration and Login Input Fields
     public TMP_InputField regisUserInput;
     public TMP_InputField regisEmailInput;
     public TMP_InputField regisPassInput;
 
-    public TMP_InputField loginEmailInput;
+    public TMP_InputField loginUserInput;
     public TMP_InputField loginPassInput;
 
 
     public TMP_Text errorText;
+
+
+
+
+    // Password validation variables
 
 
 
@@ -38,21 +49,54 @@ public class PanelChanger : MonoBehaviour
         if (regisEmailInput.text == "" || regisPassInput.text == "" || regisUserInput.text == "")
         {
             errorText.text = "Please fill in all fields.";
+            popup.PopupTrigger();
             Debug.Log("Registration failed: Incomplete fields.");
             return;
         }
-        if (regisPassInput.text.Length < 8)
-        {
-            errorText.text = "Password must be at least 8 characters.";
-            Debug.Log("Registration failed: Password too short.");
-            return;
-        }
+
+
+        // Username validation
         if (regisUserInput.text.Length < 8)
         {
             errorText.text = "Username must be at least 8 characters.";
+            popup.PopupTrigger();
             Debug.Log("Registration failed: Username too short.");
             return;
         }
+        // letters, numbers, underscore, period only
+        if (!Regex.IsMatch(regisUserInput.text, @"^[a-zA-Z][a-zA-Z0-9._]{7,23}$"))
+        {
+            errorText.text = "Username must start with a letter and use only letters, numbers, underscores or periods.";
+            return;
+        }
+
+
+
+        bool hasUpper = Regex.IsMatch(regisPassInput.text, "[A-Z]");
+        bool hasLower = Regex.IsMatch(regisPassInput.text, "[a-z]");
+        bool hasNumber = Regex.IsMatch(regisPassInput.text, "[0-9]");
+        bool hasSymbol = Regex.IsMatch(regisPassInput.text, "[^a-zA-Z0-9]");
+        bool hasNoSpaces = !regisPassInput.text.Contains(" ");
+
+        // Password validation
+        if (regisPassInput.text.Length < 8)
+        {
+            errorText.text = "Password must be at least 8 characters.";
+            popup.PopupTrigger();
+            Debug.Log("Registration failed: Password too short.");
+            return;
+        }
+        // Check for character types
+        if (!hasUpper || !hasLower || !hasNumber || !hasSymbol || !hasNoSpaces)
+        {
+            errorText.text = "Password must contain upper, lower, number, symbol, and no spaces.";
+            popup.PopupTrigger();
+            Debug.Log("Registration failed: Password complexity requirements not met.");
+            return;
+        }
+
+
+
 
         var createTask = FirebaseAuth.DefaultInstance.CreateUserWithEmailAndPasswordAsync(regisEmailInput.text, regisPassInput.text);
 
@@ -60,12 +104,15 @@ public class PanelChanger : MonoBehaviour
         {
             if (task.IsFaulted || task.IsCanceled)
             {
+                errorText.text = "Error signing up. Please try again.";
+                popup.PopupTrigger();
                 Debug.LogError("Error signing user up!");
                 return;
             }
             if (task.IsCompleted)
             {
                 Debug.Log("User Signed Up Successfully!");
+                SwitchPanel(HomePanel); // Switch to Home Panel
             }
         });
     }
