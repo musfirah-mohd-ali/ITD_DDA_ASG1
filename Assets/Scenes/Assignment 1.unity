@@ -6960,16 +6960,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756701652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.33875, y: 0.33875, z: 0.33875}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1072261416}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 400, y: 888.56085}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &756701654
@@ -6987,6 +6987,12 @@ MonoBehaviour:
   ActivePanels:
   - {fileID: 118643600}
   - {fileID: 975551050}
+  regisUserInput: {fileID: 0}
+  regisEmailInput: {fileID: 0}
+  regisPassInput: {fileID: 0}
+  loginEmailInput: {fileID: 0}
+  loginPassInput: {fileID: 0}
+  errorText: {fileID: 0}
 --- !u!1 &762075551
 GameObject:
   m_ObjectHideFlags: 0
@@ -8580,11 +8586,9 @@ RectTransform:
   - {fileID: 810029415}
   - {fileID: 118643601}
   - {fileID: 1139175391}
-  - {fileID: 975551051}
   - {fileID: 578363594}
   - {fileID: 762075552}
-  - {fileID: 756701653}
-  - {fileID: 1272397311}
+  - {fileID: 975551051}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10106,16 +10110,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272397310}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.33875, y: 0.33875, z: 0.33875}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1072261416}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 400, y: 888.56085}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1272397312
@@ -10131,6 +10135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 975551052}
+  popup: {fileID: 975551050}
 --- !u!1 &1276582669
 GameObject:
   m_ObjectHideFlags: 0
@@ -15389,6 +15394,8 @@ SceneRoots:
   - {fileID: 1600276405}
   - {fileID: 610058889}
   - {fileID: 583206207}
+  - {fileID: 756701653}
+  - {fileID: 1272397311}
   - {fileID: 1072261416}
   - {fileID: 1541649692}
   - {fileID: 977322280}

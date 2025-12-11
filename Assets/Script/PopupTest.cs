@@ -4,40 +4,49 @@ using System.Collections;
 public class PopupTest : MonoBehaviour
 {
     public Animator animator;
+    [SerializeField]
+    public GameObject popup;
     private Coroutine popupCoroutine;
 
 
     public void PopupTrigger()
     {
+        // Set popup to active in scene if not already
+        if (popup.activeSelf == false)
+        {
+            popup.SetActive(true);
+        }
+
+        animator.SetTrigger("ErrorActive");
         Debug.Log("Popup Triggered");
-        animator.SetTrigger("ErrorActive");
-        
-        // Stop any existing coroutine to avoid overlap
+
+        // Stop any existing coroutine
         if (popupCoroutine != null)
         {
             StopCoroutine(popupCoroutine);
         }
 
-        popupCoroutine = StartCoroutine(PopupDuration(5f));
+        popupCoroutine = StartCoroutine(HidePopupAfterDelay(5f));
     }
 
-    public void HideTrigger()
+    public void HidePopup()
     {
         animator.SetTrigger("ErrorActive");
+        Debug.Log("Popup Hidden");
 
-        // Stop any existing coroutine to avoid overlap
+        // Stop any existing coroutine
         if (popupCoroutine != null)
         {
             StopCoroutine(popupCoroutine);
         }
     }
 
-    private IEnumerator PopupDuration(float duration)
+    private IEnumerator HidePopupAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(delay);
 
-        // Hide the popup after the duration
+        // Hide the popup
         animator.SetTrigger("ErrorActive");
-        popupCoroutine = null;
+        Debug.Log("Popup Hidden after delay");
     }
 }

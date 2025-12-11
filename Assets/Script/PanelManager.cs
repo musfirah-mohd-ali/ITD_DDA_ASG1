@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using FIrebase.Auth;
+using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
@@ -41,6 +41,33 @@ public class PanelChanger : MonoBehaviour
             Debug.Log("Registration failed: Incomplete fields.");
             return;
         }
+        if (regisPassInput.text.Length < 8)
+        {
+            errorText.text = "Password must be at least 8 characters.";
+            Debug.Log("Registration failed: Password too short.");
+            return;
+        }
+        if (regisUserInput.text.Length < 8)
+        {
+            errorText.text = "Username must be at least 8 characters.";
+            Debug.Log("Registration failed: Username too short.");
+            return;
+        }
+
+        var createTask = FirebaseAuth.DefaultInstance.CreateUserWithEmailAndPasswordAsync(regisEmailInput.text, regisPassInput.text);
+
+        createTask.ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.LogError("Error signing user up!");
+                return;
+            }
+            if (task.IsCompleted)
+            {
+                Debug.Log("User Signed Up Successfully!");
+            }
+        });
     }
 
 
