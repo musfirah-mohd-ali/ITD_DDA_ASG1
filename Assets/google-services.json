@@ -1,22 +1,21 @@
 {
   "project_info": {
-    "project_number": "747955725844",
-    "firebase_url": "https://itd-dda-asg1-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "itd-dda-asg1",
-    "storage_bucket": "itd-dda-asg1.firebasestorage.app"
+    "project_number": "799941127640",
+    "project_id": "itd-dda-asg1-ca74e",
+    "storage_bucket": "itd-dda-asg1-ca74e.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:747955725844:android:07f14b4e70105dd0d1e901",
+        "mobilesdk_app_id": "1:799941127640:android:6e142152a6e743240056ad",
         "android_client_info": {
-          "package_name": "com.itd_dda_asg1"
+          "package_name": "com.np2025.itdddaasg1"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAoyRpcAIb5YPjKvhhwLUN-9apyvhbx2FU"
+          "current_key": "AIzaSyAVHbSDwO7htQBnnUpVnegZ-mDei4qGiEY"
         }
       ],
       "services": {
