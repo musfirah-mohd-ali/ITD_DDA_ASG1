@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: #fff8f0; /* warm cream background */
+    color: #3e2f1c; /* dark brown text */
+    line-height: 1.6;
+}
+
+header {
+    background: #FBB914; /* focal golden-yellow */
+    color: #3e2f1c; /* dark text on yellow */
+    padding: 1rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav a {
+    color: #3e2f1c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    padding: 2rem;
+    text-align: center;
+}
+
+.main-btn {
+    background: #FBB914; /* button matches focal color */
+    color: #3e2f1c;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.main-btn:hover {
+    background: #e6a700; /* slightly darker hover */
+    transform: scale(1.05);
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.collectible {
+    background: #fff3e0; /* light snack box */
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.collectible:hover {
+    transform: scale(1.05);
+}
+
+.collectible img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+input {
+    padding: 0.6rem 1rem;
+    width: 250px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+footer {
+    background: #FBB914; /* focal yellow footer */
+    color: #3e2f1c;
+    padding: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+    justify-items: center; /* centers items nicely in each column */
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.collectible {
+    background: #fff3e0; /* light snack box */
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    width: 100%;
+    max-width: 150px;
+    text-align: center;
+}
+
+.collectible img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.collectible:hover {
+    transform: scale(1.05);
+}
+
