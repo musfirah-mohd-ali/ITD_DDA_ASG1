@@ -11888,6 +11888,9 @@ MonoBehaviour:
   giftBoxPrefab: {fileID: 1886348824193987348, guid: 0f97c9d44a8338141aec3b9c7d9802b3, type: 3}
   collectiblePrefabs:
   - {fileID: 42376201088311478, guid: 51bbba8ef8a7a0243ba1bfa099e72d77, type: 3}
+  - {fileID: 1820612050233443548, guid: 1cf646fded6bd9644b9172df5110bf18, type: 3}
+  - {fileID: 2668519595517429160, guid: bb47a4bb9fc1ebc408b5d7868f678721, type: 3}
+  - {fileID: 6976355295722546185, guid: a5f6fc42a11531a449ca42c2f1007c3c, type: 3}
   openButton: {fileID: 810029414}
   currentCollectible: {fileID: 0}
 --- !u!4 &1541649692
