@@ -14,6 +14,9 @@ public class QRFlow : MonoBehaviour
     [Header("UI")]
     public GameObject openButton;
 
+    [HideInInspector]
+    public GameObject currentCollectible; // Track the spawned collectible
+
     private bool qrDetected = false;
     private GameObject currentGiftBox;
 
@@ -63,11 +66,9 @@ public class QRFlow : MonoBehaviour
             currentGiftBox = Instantiate(giftBoxPrefab, spawnPos, spawnRot);
             currentGiftBox.transform.localScale = Vector3.one * 0.1f;
 
-            // Make Rigidbody kinematic so it doesn't float
             Rigidbody rb = currentGiftBox.GetComponent<Rigidbody>();
             if (rb != null) rb.isKinematic = true;
 
-            // Ensure it’s unparented so it won’t follow camera
             currentGiftBox.transform.SetParent(null);
 
             if (openButton != null)
@@ -87,20 +88,59 @@ public class QRFlow : MonoBehaviour
         GameObject chosenCollectible = collectiblePrefabs[index];
 
         // Spawn collectible slightly above gift box
-        GameObject collectible = Instantiate(chosenCollectible);
-        collectible.transform.position = currentGiftBox.transform.position + new Vector3(0, 0.05f, 0);
-        collectible.transform.rotation = currentGiftBox.transform.rotation;
-        collectible.transform.localScale = Vector3.one * 0.05f;
+        currentCollectible = Instantiate(chosenCollectible);
+        currentCollectible.transform.position = currentGiftBox.transform.position + new Vector3(0, 0.05f, 0);
+        currentCollectible.transform.rotation = currentGiftBox.transform.rotation;
+        currentCollectible.transform.localScale = Vector3.one * 0.05f;
 
-        // Make Rigidbody kinematic for stability
-        Rigidbody rb = collectible.GetComponent<Rigidbody>();
+        Rigidbody rb = currentCollectible.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true;
 
-        collectible.transform.SetParent(null);
+        currentCollectible.transform.SetParent(null);
 
-        // Destroy the gift box to simulate “opening”
+        // Add tap collection
+        AddTapCollect(currentCollectible);
+
+        // Destroy the gift box
         Destroy(currentGiftBox);
 
         Debug.Log("Gift opened! Spawned: " + chosenCollectible.name);
+    }
+
+    // Adds tap interaction to spawned collectible
+    private void AddTapCollect(GameObject collectible)
+    {
+        TapCollect tap = collectible.AddComponent<TapCollect>();
+        tap.qrFlow = this;
+    }
+
+    // Called by TapCollect script
+    public void CollectItem()
+    {
+        if (currentCollectible == null) return;
+
+        Debug.Log("Collected: " + currentCollectible.name);
+
+        // TODO: Save collectible to JSON / Firebase here
+
+        Destroy(currentCollectible);
+        currentCollectible = null;
+    }
+}
+
+// --------------------------
+// Separate helper script attached dynamically
+public class TapCollect : MonoBehaviour
+{
+    [HideInInspector]
+    public QRFlow qrFlow;
+
+    private void OnMouseDown()
+    {
+        if (qrFlow != null)
+        {
+            qrFlow.currentCollectible = this.gameObject;
+            qrFlow.CollectItem();
+        }
     }
 }
