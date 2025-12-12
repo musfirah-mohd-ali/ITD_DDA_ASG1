@@ -19,6 +19,7 @@ public class PanelManager : MonoBehaviour
     public TMP_InputField regisUserInput;
     public TMP_InputField regisEmailInput;
     public TMP_InputField regisPassInput;
+    public TMP_InputField regisPassConfirmInput;
 
     public TMP_InputField loginUserInput;
     public TMP_InputField loginPassInput;
@@ -95,6 +96,14 @@ public class PanelManager : MonoBehaviour
             return;
         }
 
+        if (regisPassInput.text != regisPassConfirmInput.text)
+        {
+            errorText.text = "Passwords do not match.";
+            popup.PopupTrigger();
+            Debug.Log("Registration failed: Passwords do not match.");
+            return;
+        }
+
 
 
 
@@ -104,6 +113,7 @@ public class PanelManager : MonoBehaviour
         {
             if (task.IsFaulted || task.IsCanceled)
             {
+                
                 errorText.text = "Error signing up. Please try again.";
                 popup.PopupTrigger();
                 Debug.LogError("Error signing user up!");
@@ -112,7 +122,44 @@ public class PanelManager : MonoBehaviour
             if (task.IsCompleted)
             {
                 Debug.Log("User Signed Up Successfully!");
-                SwitchPanel(HomePanel); // Switch to Home Panel
+                
+                var db = FirebaseDatabase.DefaultInstance.RootReference;
+                Debug.Log("Database reference obtained.");
+
+                // Create user profile
+                var authResult = task.Result;
+                Debug.Log("Firebase User ID: " + authResult.User.UserId);
+
+                FirebaseUser newUser = authResult.User;
+
+                string uid = newUser.UserId;
+                Debug.Log("Firebase User ID: " + newUser.UserId);                
+
+                UserProfile userProfile = new UserProfile(regisUserInput.text, regisEmailInput.text);
+
+
+                string json = JsonUtility.ToJson(userProfile);
+                Debug.Log("JSON being written: " + json);
+
+
+                db.Child("users").Child(uid).SetRawJsonValueAsync(json).ContinueWithOnMainThread(dbTask =>
+                {
+                    if (dbTask.IsFaulted || dbTask.IsCanceled)
+                    {
+                        errorText.text = "Error saving user profile. Please try again.";
+                        popup.PopupTrigger();
+                        Debug.LogError("Error saving user profile!");
+                        return;
+                    }
+                    if (dbTask.IsCompleted)
+                    {
+                        Debug.Log("User profile saved successfully!");
+                        SwitchPanel(HomePanel); // Switch to Home Panel
+                    }
+                });
+
+
+
             }
         });
     }

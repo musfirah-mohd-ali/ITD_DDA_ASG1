@@ -15,11 +15,9 @@ public class PopupTest : MonoBehaviour
     {
         // Set popup to active in scene if not already
         if (popup.activeSelf == false)
-        {
             popup.SetActive(true);
-        }
 
-        animator.SetTrigger("ErrorActive");
+        animator.SetBool("ErrorActive", true);
         Debug.Log("Popup Triggered");
 
         // Stop any existing coroutine
@@ -33,7 +31,7 @@ public class PopupTest : MonoBehaviour
 
     public void HidePopup()
     {
-        animator.SetTrigger("ErrorActive");
+        animator.SetBool("ErrorActive", false);
         Debug.Log("Popup Hidden");
 
         // Stop any existing coroutine
@@ -48,7 +46,7 @@ public class PopupTest : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         // Hide the popup
-        animator.SetTrigger("ErrorActive");
+        animator.SetBool("ErrorActive", false);
         Debug.Log("Popup Hidden after delay");
     }
 }
