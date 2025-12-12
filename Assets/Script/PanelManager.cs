@@ -21,7 +21,7 @@ public class PanelManager : MonoBehaviour
     public TMP_InputField regisPassInput;
     public TMP_InputField regisPassConfirmInput;
 
-    public TMP_InputField loginUserInput;
+    public TMP_InputField loginEmailInput;
     public TMP_InputField loginPassInput;
 
 
@@ -121,7 +121,6 @@ public class PanelManager : MonoBehaviour
             }
             if (task.IsCompleted)
             {
-                Debug.Log("User Signed Up Successfully!");
                 
                 var db = FirebaseDatabase.DefaultInstance.RootReference;
                 Debug.Log("Database reference obtained.");
@@ -164,7 +163,39 @@ public class PanelManager : MonoBehaviour
         });
     }
 
+    public void SignIn()
+    {
+        if (loginEmailInput.text == "" || loginPassInput.text == "")
+        {
+            errorText.text = "Please fill in all fields.";
+            popup.PopupTrigger();
+            Debug.Log("Login failed: Incomplete fields.");
+            return;
+        }
 
+        // Sign in with email and password
+        var signInTask = FirebaseAuth.DefaultInstance.SignInWithEmailAndPasswordAsync(loginEmailInput.text, loginPassInput.text);
+
+        signInTask.ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                errorText.text = "Error signing in. Incorrect email or password.";
+                popup.PopupTrigger();
+                Debug.LogError("Error signing user in!");
+                return;
+            }
+            if (task.IsCompleted)
+            {
+                Debug.Log("User signed in successfully!");
+
+                FirebaseUser user = task.Result.User;
+                Debug.Log("Logged in User ID: " + user.UserId);
+
+                SwitchPanel(DockPanel); // Switch to Dock Panel
+            }
+        });
+    }
 
     void Start()
     {
