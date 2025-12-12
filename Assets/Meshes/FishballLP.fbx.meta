@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 44b0a72b5c0753b43ae97437d4b3274c
+guid: 9a6eacca7cbd5ad459e020eec6c4a338
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,7 +7,7 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: standardSurface1
+      name: fishballsMaterial
     second: {fileID: 2100000, guid: 7a377a9305a486745b9e580340a13474, type: 2}
   materials:
     materialImportMode: 2
@@ -40,7 +40,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
