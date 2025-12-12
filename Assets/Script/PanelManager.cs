@@ -121,7 +121,13 @@ public class PanelManager : MonoBehaviour
             }
             if (task.IsCompleted)
             {
-                
+                Debug.Log("User signed up successfully!");
+                regisUserInput.text = "";
+                regisEmailInput.text = "";
+                regisPassInput.text = "";
+                regisPassConfirmInput.text = "";
+
+
                 var db = FirebaseDatabase.DefaultInstance.RootReference;
                 Debug.Log("Database reference obtained.");
 
@@ -192,9 +198,22 @@ public class PanelManager : MonoBehaviour
                 FirebaseUser user = task.Result.User;
                 Debug.Log("Logged in User ID: " + user.UserId);
 
-                SwitchPanel(DockPanel); // Switch to Dock Panel
+                SwitchPanel(HomePanel); // Switch to Home Panel
             }
         });
+    }
+
+    public void Logout()
+    {
+        FirebaseAuth.DefaultInstance.SignOut();
+        Debug.Log("User logged out.");
+
+
+        loginEmailInput.text = "";
+        loginPassInput.text = "";
+
+        // Go back to login panel
+        SwitchPanel(DockPanel);
     }
 
     void Start()
