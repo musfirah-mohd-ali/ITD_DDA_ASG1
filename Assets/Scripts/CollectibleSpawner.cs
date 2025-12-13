@@ -2,8 +2,8 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using Firebase.Auth;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CollectibleSpawner : MonoBehaviour
 {
@@ -20,15 +20,26 @@ public class CollectibleSpawner : MonoBehaviour
     public GameObject wingButton;
 
     private Dictionary<string, GameObject> prefabMap;
+    private Dictionary<string, GameObject> buttonMap;
 
     void Start()
     {
+        // Map lowercase keys to prefabs
         prefabMap = new Dictionary<string, GameObject>()
         {
-            { "hasCurry", curryPrefab },
-            { "hasFBalls", fballsPrefab },
-            { "hasSotong", sotongPrefab },
-            { "hasWing", wingPrefab }
+            { "hascurry", curryPrefab },
+            { "hasfballs", fballsPrefab },
+            { "hassotong", sotongPrefab },
+            { "haswing", wingPrefab }
+        };
+
+        // Map lowercase keys to buttons
+        buttonMap = new Dictionary<string, GameObject>()
+        {
+            { "hascurry", curryButton },
+            { "hasfballs", fballsButton },
+            { "hassotong", sotongButton },
+            { "haswing", wingButton }
         };
 
         HideAllButtons();
@@ -37,10 +48,8 @@ public class CollectibleSpawner : MonoBehaviour
 
     void HideAllButtons()
     {
-        curryButton.SetActive(false);
-        fballsButton.SetActive(false);
-        sotongButton.SetActive(false);
-        wingButton.SetActive(false);
+        foreach (var btn in buttonMap.Values)
+            btn.SetActive(false);
     }
 
     void LoadCollection()
@@ -66,31 +75,36 @@ public class CollectibleSpawner : MonoBehaviour
 
                 foreach (var item in snapshot.Children)
                 {
-                    if (item.Value.ToString() == "True")
-                    {
-                        StartCoroutine(EnableButtonNextFrame(item.Key));
-                    }
+                    string key = item.Key.Trim().ToLower();
+                    string value = item.Value.ToString().Trim().ToLower();
+
+                    Debug.Log($"Found key: {key}, value: {value}");
+
+                    if (value == "true" && buttonMap.ContainsKey(key))
+                        StartCoroutine(EnableButtonNextFrame(key));
                 }
             });
     }
 
     IEnumerator EnableButtonNextFrame(string key)
     {
-        yield return null; // wait one frame to ensure UI updates on main thread
+        yield return null; // wait one frame for UI
         EnableButton(key);
     }
 
     void EnableButton(string key)
     {
-        if (key == "hasCurry") curryButton.SetActive(true);
-        if (key == "hasFBalls") fballsButton.SetActive(true);
-        if (key == "hasSotong") sotongButton.SetActive(true);
-        if (key == "hasWing") wingButton.SetActive(true);
-        Debug.Log($"Enabled button for {key}");
+        if (buttonMap.ContainsKey(key))
+        {
+            buttonMap[key].SetActive(true);
+            Debug.Log($"Enabled button for {key}");
+        }
     }
 
     public void SpawnCollectible(string key)
     {
+        key = key.Trim().ToLower();
+
         if (!prefabMap.ContainsKey(key)) return;
 
         Transform cam = Camera.main.transform;
@@ -99,5 +113,7 @@ public class CollectibleSpawner : MonoBehaviour
 
         GameObject obj = Instantiate(prefabMap[key], spawnPos, spawnRot);
         obj.transform.localScale = Vector3.one * 0.05f;
+
+        Debug.Log($"Spawned collectible for {key}");
     }
 }
