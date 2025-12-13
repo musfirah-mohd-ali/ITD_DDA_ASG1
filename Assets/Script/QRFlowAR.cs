@@ -73,6 +73,7 @@ public class QRFlow : MonoBehaviour
 
             if (openButton != null)
                 openButton.SetActive(true);
+                Debug.Log("Gift box spawned. Ready to open!");
         }
     }
 
@@ -125,22 +126,5 @@ public class QRFlow : MonoBehaviour
 
         Destroy(currentCollectible);
         currentCollectible = null;
-    }
-}
-
-// --------------------------
-// Separate helper script attached dynamically
-public class TapCollect : MonoBehaviour
-{
-    [HideInInspector]
-    public QRFlow qrFlow;
-
-    private void OnMouseDown()
-    {
-        if (qrFlow != null)
-        {
-            qrFlow.currentCollectible = this.gameObject;
-            qrFlow.CollectItem();
-        }
     }
 }
