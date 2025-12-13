@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
@@ -27,20 +28,57 @@ public class PanelManager : MonoBehaviour
 
     public TMP_Text errorText;
 
-
+    [SerializeField]
+    public List<CollectionMaterialChanger> objectsToUpdate; // Array of objects to update materials
 
     public void SwitchPanel(GameObject panelToActivate)
     {
         Transform parent = panelToActivate.transform.parent;
+
+        ObjectUpdateMaterials(); // Update materials of specified objects
+
         foreach (Transform child in parent)
         {
             child.gameObject.SetActive(false);
         }
         panelToActivate.SetActive(true);
+
+        Debug.Log("Switched to panel: " + panelToActivate.name);
     }
 
+    public void ObjectUpdateMaterials()
+    {
+        foreach (CollectionMaterialChanger obj in objectsToUpdate)
+        {
+            obj.UpdateMaterial(); // Update materials of specified objects
+        }
+    }
 
+    public void UnlockCollectible(CollectibleType type)
+    {
+        switch (type) // Unlock the respective collectible in user profile
+        {
+            case CollectibleType.Curry:
+                UserData.Profile.collections.basic.hasCurry = true;
+                break;
 
+            case CollectibleType.Wing:
+                UserData.Profile.collections.basic.hasWing = true;
+                break;
+
+            case CollectibleType.Fishballs:
+                UserData.Profile.collections.basic.hasFBalls = true;
+                break;
+
+            case CollectibleType.Sotong:
+                UserData.Profile.collections.basic.hasSotong = true;
+                break;
+        }
+
+        SaveUserProfile(); // Save updated profile to database
+    }
+
+    
     public void Register()
     {
         if (regisEmailInput.text == "" || regisPassInput.text == "" || regisUserInput.text == "" || regisPassConfirmInput.text == "")
@@ -240,11 +278,33 @@ public class PanelManager : MonoBehaviour
             string json = task.Result.GetRawJsonValue();
             UserData.Profile = JsonUtility.FromJson<UserProfile>(json);
 
+            ObjectUpdateMaterials(); // Update materials of specified objects
+
             Debug.Log("Player data loaded!");
             Debug.Log($"Curry: {UserData.Profile.collections.basic.hasCurry}");
             Debug.Log($"Wing: {UserData.Profile.collections.basic.hasWing}");
             Debug.Log($"Fishballs: {UserData.Profile.collections.basic.hasFBalls}");
             Debug.Log($"Sotong: {UserData.Profile.collections.basic.hasSotong}");
+        });
+    }
+    public void SaveUserProfile()
+    {
+        if (UserData.Profile == null) return;        
+        
+        string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+        var db = FirebaseDatabase.DefaultInstance.RootReference;
+        
+        string json = JsonUtility.ToJson(UserData.Profile);
+        db.Child("users").Child(uid).SetRawJsonValueAsync(json)
+        .ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.LogError("Failed to save user profile");
+                return;
+            }
+
+            Debug.Log("User profile saved successfully");
         });
     }
 

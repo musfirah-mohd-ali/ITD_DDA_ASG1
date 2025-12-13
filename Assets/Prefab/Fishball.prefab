@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 4908449553213645054}
   - component: {fileID: 4133477722356859756}
   - component: {fileID: 90691935074830172}
+  - component: {fileID: -1685823523782893442}
   m_Layer: 0
-  m_Name: FishballLP
+  m_Name: Fishball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,3 +224,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1685823523782893442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711942902869901801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd6af469e5649b48ba9d0c964cbdb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2

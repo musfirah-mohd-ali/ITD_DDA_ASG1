@@ -5,12 +5,16 @@ using UnityEngine.XR.ARSubsystems;
 public class QRFlow : MonoBehaviour
 {
     public ARTrackedImageManager trackedImageManager;
+    public PanelManager panelManager;
 
     public GameObject giftBoxPrefab;
     public GameObject[] collectiblePrefabs;
+    public GameObject QRFramePanel;
 
     public GameObject openButton;
     public GameObject collectButton;
+    public GameObject confetti;
+    private GameObject currentConfetti;
 
     public GameObject currentCollectible;
 
@@ -65,6 +69,8 @@ public class QRFlow : MonoBehaviour
 
             if (openButton != null)
                 openButton.SetActive(true);
+            if (QRFramePanel != null)
+                QRFramePanel.SetActive(false);
         }
     }
 
@@ -78,10 +84,15 @@ public class QRFlow : MonoBehaviour
         int index = Random.Range(0, collectiblePrefabs.Length);
         GameObject chosenCollectible = collectiblePrefabs[index];
 
+
+        // Spawn the collectible above the gift box
         currentCollectible = Instantiate(chosenCollectible);
         currentCollectible.transform.position = currentGiftBox.transform.position + new Vector3(0, 0.05f, 0);
         currentCollectible.transform.rotation = currentGiftBox.transform.rotation;
         currentCollectible.transform.localScale = Vector3.one * 0.05f;
+
+        // Spawn confetti effect
+        currentConfetti = Instantiate(confetti, currentGiftBox.transform.position, Quaternion.identity);
 
         Rigidbody rb = currentCollectible.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true;
@@ -96,8 +107,20 @@ public class QRFlow : MonoBehaviour
     {
         if (currentCollectible == null) return;
 
+        CollectibleIdentity identity = currentCollectible.GetComponent<CollectibleIdentity>();
+
+        if (identity != null)
+        {
+            panelManager.UnlockCollectible(identity.type);
+        }
+
+
         Destroy(currentCollectible);
+        Destroy(currentConfetti);
+
         currentCollectible = null;
+        currentConfetti = null;
+        qrDetected = false;
 
         if (collectButton != null)
             collectButton.SetActive(false);

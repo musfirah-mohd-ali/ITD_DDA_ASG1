@@ -1853,7 +1853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &118643601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2098,7 +2098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &166742881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10427,6 +10427,11 @@ MonoBehaviour:
   loginEmailInput: {fileID: 700176819}
   loginPassInput: {fileID: 457936589}
   errorText: {fileID: 969998585}
+  objectsToUpdate:
+  - {fileID: 7908756987586125229}
+  - {fileID: 8284606133794893403}
+  - {fileID: 8571591663731925679}
+  - {fileID: 9128837188920704536}
 --- !u!1001 &786770944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16701,14 +16706,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackedImageManager: {fileID: 583206213}
+  panelManager: {fileID: 0}
   giftBoxPrefab: {fileID: 1886348824193987348, guid: 0f97c9d44a8338141aec3b9c7d9802b3, type: 3}
   collectiblePrefabs:
   - {fileID: 5588785080019270718, guid: a4d5cb2bce6b71c46af0ab8196497985, type: 3}
   - {fileID: 5079383318413721314, guid: abf3618ada1cc9246b3253f21afa8da7, type: 3}
   - {fileID: 4711942902869901801, guid: 8aaf5139f77e45b429e5ef9f24277faa, type: 3}
   - {fileID: 1793379999667318925, guid: 7e9eb2d6acbd22d4da909924e06cc0d0, type: 3}
+  QRFramePanel: {fileID: 1798366526}
   openButton: {fileID: 2140185187}
   collectButton: {fileID: 321592236}
+  confetti: {fileID: 3495100134638395964, guid: 29236e688b09b3f4bbc60249f30460c1, type: 3}
   currentCollectible: {fileID: 0}
 --- !u!4 &1541649692
 Transform:
@@ -22219,6 +22227,7 @@ GameObject:
   - component: {fileID: 9128837188920704534}
   - component: {fileID: 8639811902672967226}
   - component: {fileID: 9128837188920704535}
+  - component: {fileID: 9128837188920704536}
   m_Layer: 6
   m_Name: ChickenWIngLP 1
   m_TagString: Untagged
@@ -22283,6 +22292,7 @@ GameObject:
   - component: {fileID: 7184736105176458717}
   - component: {fileID: 4468787766862580562}
   - component: {fileID: 7908756987586125228}
+  - component: {fileID: 7908756987586125229}
   m_Layer: 6
   m_Name: currypuffLP 2
   m_TagString: Untagged
@@ -22370,6 +22380,7 @@ GameObject:
   - component: {fileID: 3306156879887264963}
   - component: {fileID: 2593326141810152404}
   - component: {fileID: 8284606133794893402}
+  - component: {fileID: 8284606133794893403}
   m_Layer: 6
   m_Name: FishballLP
   m_TagString: Untagged
@@ -22429,6 +22440,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 35
   rotationAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &7908756987586125229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234784912239083511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928aca4a39189d84b8570471a4cd594d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibleType: 0
+  unlockedMaterial: {fileID: 2100000, guid: f751bcfbf355c114fb164b97c5646084, type: 2}
+  lockedMaterial: {fileID: 2100000, guid: c7975f34c575f99408bc93948432cdb2, type: 2}
 --- !u!4 &8284606133794893401
 Transform:
   m_ObjectHideFlags: 0
@@ -22458,6 +22484,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 35
   rotationAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &8284606133794893403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6680777687980170901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928aca4a39189d84b8570471a4cd594d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibleType: 2
+  unlockedMaterial: {fileID: 2100000, guid: 7a377a9305a486745b9e580340a13474, type: 2}
+  lockedMaterial: {fileID: 2100000, guid: c7975f34c575f99408bc93948432cdb2, type: 2}
 --- !u!1 &8571591663731925677
 GameObject:
   m_ObjectHideFlags: 0
@@ -22470,6 +22511,7 @@ GameObject:
   - component: {fileID: 667456164911125672}
   - component: {fileID: 362058292740584259}
   - component: {fileID: 8571591663731925678}
+  - component: {fileID: 8571591663731925679}
   m_Layer: 6
   m_Name: sotongLP 1
   m_TagString: Untagged
@@ -22491,6 +22533,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 35
   rotationAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &8571591663731925679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571591663731925677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928aca4a39189d84b8570471a4cd594d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibleType: 3
+  unlockedMaterial: {fileID: 2100000, guid: 186838ecae795d54ab7d07197a42f96a, type: 2}
+  lockedMaterial: {fileID: 2100000, guid: c7975f34c575f99408bc93948432cdb2, type: 2}
 --- !u!23 &8639811902672967226
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22558,6 +22615,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 35
   rotationAxis: {x: 0, y: 1, z: 0}
+--- !u!114 &9128837188920704536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554544526535602112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928aca4a39189d84b8570471a4cd594d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibleType: 1
+  unlockedMaterial: {fileID: 2100000, guid: b2cfc32a8f069c64186301e15a871af2, type: 2}
+  lockedMaterial: {fileID: 2100000, guid: c7975f34c575f99408bc93948432cdb2, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
