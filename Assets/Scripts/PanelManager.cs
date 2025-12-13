@@ -119,6 +119,12 @@ public class PanelManager : MonoBehaviour
             if (task.IsCompleted)
             {
                 Debug.Log("User signed up successfully!");
+                
+                string username = regisUserInput.text;
+                Debug.Log("Registered Username: " + username);
+                string email = regisEmailInput.text;
+                Debug.Log("Registered Email: " + email);
+                
                 regisUserInput.text = "";
                 regisEmailInput.text = "";
                 regisPassInput.text = "";
@@ -137,7 +143,7 @@ public class PanelManager : MonoBehaviour
                 string uid = newUser.UserId;
                 Debug.Log("Firebase User ID: " + newUser.UserId);                
 
-                UserProfile userProfile = new UserProfile(regisUserInput.text, regisEmailInput.text);
+                UserProfile userProfile = new UserProfile(username, email);
 
 
                 string json = JsonUtility.ToJson(userProfile);
@@ -202,6 +208,8 @@ public class PanelManager : MonoBehaviour
                 FirebaseUser user = task.Result.User;
                 Debug.Log("Logged in User ID: " + user.UserId);
 
+                LoadUserProfile(user.UserId);
+
                 SwitchPanel(HomePanel); // Switch to Home Panel
             }
         });
@@ -223,10 +231,20 @@ public class PanelManager : MonoBehaviour
                 return;
             }
 
+            if (!task.Result.Exists)
+            {
+                Debug.LogError("User profile does not exist");
+                return;
+            }
+
             string json = task.Result.GetRawJsonValue();
             UserData.Profile = JsonUtility.FromJson<UserProfile>(json);
 
             Debug.Log("Player data loaded!");
+            Debug.Log($"Curry: {UserData.Profile.collections.basic.hasCurry}");
+            Debug.Log($"Wing: {UserData.Profile.collections.basic.hasWing}");
+            Debug.Log($"Fishballs: {UserData.Profile.collections.basic.hasFBalls}");
+            Debug.Log($"Sotong: {UserData.Profile.collections.basic.hasSotong}");
         });
     }
 
