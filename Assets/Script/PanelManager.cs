@@ -29,12 +29,6 @@ public class PanelManager : MonoBehaviour
 
 
 
-
-    // Password validation variables
-
-
-
-
     public void SwitchPanel(GameObject panelToActivate)
     {
         Transform parent = panelToActivate.transform.parent;
@@ -45,15 +39,18 @@ public class PanelManager : MonoBehaviour
         panelToActivate.SetActive(true);
     }
 
+
+
     public void Register()
     {
-        if (regisEmailInput.text == "" || regisPassInput.text == "" || regisUserInput.text == "")
+        if (regisEmailInput.text == "" || regisPassInput.text == "" || regisUserInput.text == "" || regisPassConfirmInput.text == "")
         {
             errorText.text = "Please fill in all fields.";
             popup.PopupTrigger();
             Debug.Log("Registration failed: Incomplete fields.");
             return;
         }
+
 
 
         // Username validation
@@ -169,6 +166,8 @@ public class PanelManager : MonoBehaviour
         });
     }
 
+
+
     public void SignIn()
     {
         if (loginEmailInput.text == "" || loginPassInput.text == "")
@@ -203,6 +202,8 @@ public class PanelManager : MonoBehaviour
         });
     }
 
+
+
     public void Logout()
     {
         FirebaseAuth.DefaultInstance.SignOut();
@@ -215,6 +216,8 @@ public class PanelManager : MonoBehaviour
         // Go back to login panel
         SwitchPanel(DockPanel);
     }
+
+
 
     void Start()
     {
