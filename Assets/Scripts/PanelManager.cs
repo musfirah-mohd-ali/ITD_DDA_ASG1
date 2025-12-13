@@ -312,6 +312,7 @@ public class PanelManager : MonoBehaviour
 
     public void Logout()
     {
+        SaveUserProfile();
         FirebaseAuth.DefaultInstance.SignOut();
         Debug.Log("User logged out.");
 

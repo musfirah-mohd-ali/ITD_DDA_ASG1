@@ -1853,7 +1853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &118643601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2098,7 +2098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &166742881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16706,7 +16706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackedImageManager: {fileID: 583206213}
-  panelManager: {fileID: 0}
+  panelManager: {fileID: 756701654}
   giftBoxPrefab: {fileID: 1886348824193987348, guid: 0f97c9d44a8338141aec3b9c7d9802b3, type: 3}
   collectiblePrefabs:
   - {fileID: 5588785080019270718, guid: a4d5cb2bce6b71c46af0ab8196497985, type: 3}
@@ -16714,6 +16714,7 @@ MonoBehaviour:
   - {fileID: 4711942902869901801, guid: 8aaf5139f77e45b429e5ef9f24277faa, type: 3}
   - {fileID: 1793379999667318925, guid: 7e9eb2d6acbd22d4da909924e06cc0d0, type: 3}
   QRFramePanel: {fileID: 1798366526}
+  HomePanel: {fileID: 507941487}
   openButton: {fileID: 2140185187}
   collectButton: {fileID: 321592236}
   confetti: {fileID: 3495100134638395964, guid: 29236e688b09b3f4bbc60249f30460c1, type: 3}

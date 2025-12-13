@@ -10,6 +10,7 @@ public class QRFlow : MonoBehaviour
     public GameObject giftBoxPrefab;
     public GameObject[] collectiblePrefabs;
     public GameObject QRFramePanel;
+    public GameObject HomePanel;
 
     public GameObject openButton;
     public GameObject collectButton;
@@ -124,5 +125,7 @@ public class QRFlow : MonoBehaviour
 
         if (collectButton != null)
             collectButton.SetActive(false);
+
+        panelManager.SwitchPanel(HomePanel);
     }
 }
