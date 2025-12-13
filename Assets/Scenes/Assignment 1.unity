@@ -1853,7 +1853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &118643601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3588,7 +3588,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 280732788}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -8458,7 +8458,11 @@ PrefabInstance:
     - target: {fileID: 2512387470528047737, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
       propertyPath: m_PlanePrefab
       value: 
-      objectReference: {fileID: 1585201990951412, guid: 886609fc1566e4c27b399f1095d6de18, type: 3}
+      objectReference: {fileID: 7002866023139945562, guid: 47e1d2a5df793864a8fbfa4c6320215d, type: 3}
+    - target: {fileID: 2512387470528047737, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
+      propertyPath: m_DetectionMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2512387470528047738, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -12583,7 +12587,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1049609913}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -15725,7 +15729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1363264953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19341,7 +19345,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1861997358}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -20232,7 +20236,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1993164722}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
