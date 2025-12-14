@@ -1,131 +1,81 @@
 using UnityEngine;
-using Firebase;
-using Firebase.Database;
-using Firebase.Auth;
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 
-public class CollectibleSpawner : MonoBehaviour
+public class SpawnerManager : MonoBehaviour
 {
-    public GameObject curryPrefab;
-    public GameObject fballsPrefab;
-    public GameObject sotongPrefab;
-    public GameObject wingPrefab;
+    public GameObject lockedText;
 
-    public GameObject curryButton;
-    public GameObject fballsButton;
-    public GameObject sotongButton;
-    public GameObject wingButton;
 
-    private Dictionary<string, GameObject> prefabMap;
-    private Dictionary<string, GameObject> buttonMap;
-
-    void Start()
+    // 🔘 BUTTON CALLS THIS
+    public void TrySpawn(GameObject prefab)
     {
-        prefabMap = new Dictionary<string, GameObject>()
+        if (prefab == null) return;
+
+        CollectibleIdentity identity = prefab.GetComponent<CollectibleIdentity>(); // Get the identity component
+
+        if (identity == null)
         {
-            { "hascurry", curryPrefab },
-            { "hasfballs", fballsPrefab },
-            { "hassotong", sotongPrefab },
-            { "haswing", wingPrefab }
-        };
-
-        buttonMap = new Dictionary<string, GameObject>()
-        {
-            { "hascurry", curryButton },
-            { "hasfballs", fballsButton },
-            { "hassotong", sotongButton },
-            { "haswing", wingButton }
-        };
-
-        HideAllButtons();
-        LoadCollection();
-    }
-
-    void HideAllButtons()
-    {
-        foreach (var btn in buttonMap.Values)
-            btn.SetActive(false);
-    }
-
-    void LoadCollection()
-    {
-        FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
-
-        if (user == null)
-        {
-            Debug.LogWarning("No Firebase user logged in! Cannot load collection.");
+            Debug.LogError("Prefab missing CollectibleIdentity!");
             return;
         }
 
-        string uid = user.UserId;
+        bool isUnlocked = CheckOwnership(identity.type); // Check if user owns this collectible
 
-        FirebaseDatabase.DefaultInstance
-            .GetReference(uid)
-            .Child("collections")
-            .Child("basic")
-            .GetValueAsync()
-            .ContinueWith(task =>
-            {
-                if (task.IsFaulted)
-                {
-                    Debug.LogError($"FIREBASE ERROR: {task.Exception}"); 
-                    return;
-                }
-                if (task.IsCanceled)
-                {
-                    Debug.LogWarning("FIREBASE WARNING: Task canceled.");
-                    return;
-                }
-                
-                if (task.Result == null || !task.Result.Exists)
-                {
-                    Debug.LogWarning("FIREBASE WARNING: Data not found at the specified path.");
-                    return;
-                }
-
-                DataSnapshot snapshot = task.Result;
-                foreach (var item in snapshot.Children)
-                {
-                    string key = item.Key.Trim().ToLower();
-                    string value = item.Value.ToString().Trim().ToLower();
-
-                    Debug.Log($"Found key: {key}, value: {value}");
-
-                    if (value == "true" && buttonMap.ContainsKey(key))
-                        StartCoroutine(EnableButtonNextFrame(key));
-                }
-            });
-    }
-
-    IEnumerator EnableButtonNextFrame(string key)
-    {
-        yield return null;
-        EnableButton(key);
-    }
-
-    void EnableButton(string key)
-    {
-        if (buttonMap.ContainsKey(key))
+        if (!isUnlocked)
         {
-            buttonMap[key].SetActive(true);
-            Debug.Log($"Enabled button for {key}");
+            StartCoroutine(ShowLockedMessage());
+            return;
         }
+
+        Spawn(prefab); // Spawn the collectible
     }
 
-    public void SpawnCollectible(string key)
+    bool CheckOwnership(CollectibleType type) // Check if user owns the collectible
     {
-        key = key.Trim().ToLower();
+        if (UserData.Profile == null)
+        {
+            Debug.LogWarning("User profile not loaded yet.");
+            return false;
+        }
 
-        if (!prefabMap.ContainsKey(key)) return;
+        var basic = UserData.Profile.collections.basic;
 
+        switch (type) // Check based on collectible type
+        {
+            case CollectibleType.Curry:
+                return basic.hasCurry;
+
+            case CollectibleType.Wing:
+                return basic.hasWing;
+
+            case CollectibleType.Fishballs:
+                return basic.hasFBalls;
+
+            case CollectibleType.Sotong:
+                return basic.hasSotong;
+        }
+
+        return false; // Default to false if type is unrecognized
+    }
+
+    void Spawn(GameObject prefab) // Spawn the collectible in front of the camera
+    {
         Transform cam = Camera.main.transform;
+
         Vector3 spawnPos = cam.position + cam.forward * 0.4f;
         Quaternion spawnRot = Quaternion.Euler(0, cam.eulerAngles.y, 0);
 
-        GameObject obj = Instantiate(prefabMap[key], spawnPos, spawnRot);
+        GameObject obj = Instantiate(prefab, spawnPos, spawnRot);
         obj.transform.localScale = Vector3.one * 0.05f;
 
-        Debug.Log($"Spawned collectible for {key}");
+        Debug.Log("Spawned: " + prefab.name);
+    } 
+
+    IEnumerator ShowLockedMessage()
+    {
+        lockedText.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+        lockedText.SetActive(false);
     }
 }
