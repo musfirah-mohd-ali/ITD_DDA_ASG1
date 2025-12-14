@@ -29,6 +29,7 @@ public class SpawnerManager : MonoBehaviour
         }
 
         Spawn(prefab); // Spawn the collectible
+        audioManager.PlaySound(spawnSound); // Play spawn sound
     }
 
     bool CheckOwnership(CollectibleType type) // Check if user owns the collectible
