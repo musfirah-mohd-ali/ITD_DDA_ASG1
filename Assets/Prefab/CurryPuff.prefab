@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 828176595707069351}
   - component: {fileID: 116553638041600900}
   - component: {fileID: -3018821007907438137}
+  - component: {fileID: 1881393893061350015}
   m_Layer: 0
   m_Name: CurryPuff
   m_TagString: Untagged
@@ -100,8 +101,8 @@ Rigidbody:
   m_GameObject: {fileID: 5588785080019270718}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 10
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -116,8 +117,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 16
+  m_CollisionDetection: 1
 --- !u!114 &6887935065497629271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +210,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4532250835489515493, guid: f5afdd127c2601a4280b957d3ca646b2, type: 3}
 --- !u!114 &116553638041600900
@@ -237,3 +238,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+--- !u!114 &1881393893061350015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5588785080019270718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512ef6a40f815ca41bd5431b62428a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
