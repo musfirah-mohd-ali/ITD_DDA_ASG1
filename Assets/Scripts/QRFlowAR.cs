@@ -6,6 +6,10 @@ public class QRFlow : MonoBehaviour
 {
     public ARTrackedImageManager trackedImageManager;
     public PanelManager panelManager;
+    public AudioManager audioManager;
+
+
+    public AudioClip giftSpawnSound;
 
     public GameObject giftBoxPrefab;
     public GameObject[] collectiblePrefabs;
@@ -64,6 +68,7 @@ public class QRFlow : MonoBehaviour
 
             currentGiftBox = Instantiate(giftBoxPrefab, spawnPos, spawnRot);
             currentGiftBox.transform.localScale = Vector3.one * 0.1f;
+            audioManager.PlaySound(giftSpawnSound);
 
             Rigidbody rb = currentGiftBox.GetComponent<Rigidbody>();
             if (rb != null) rb.isKinematic = true;

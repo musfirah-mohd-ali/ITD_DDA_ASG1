@@ -8,6 +8,9 @@ public class PopupTest : MonoBehaviour
     public GameObject popup;
     private Coroutine popupCoroutine;
 
+    public AudioManager audioManager;
+    public AudioClip errorSound;
+
     
 
 
@@ -18,6 +21,7 @@ public class PopupTest : MonoBehaviour
             popup.SetActive(true);
 
         animator.SetBool("ErrorActive", true);
+        audioManager.PlaySound(errorSound);
         Debug.Log("Popup Triggered");
 
         // Stop any existing coroutine

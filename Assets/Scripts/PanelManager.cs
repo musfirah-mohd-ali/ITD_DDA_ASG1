@@ -14,7 +14,11 @@ public class PanelManager : MonoBehaviour
     public GameObject HomePanel;
     public GameObject DockPanel;
     public PopupTest popup;
+    public AudioManager audioManager;
 
+
+    public AudioClip loginSound;
+    public AudioClip logoutSound;
 
     // Registration and Login Input Fields
     public TMP_InputField regisUserInput;
@@ -206,6 +210,7 @@ public class PanelManager : MonoBehaviour
 
 
                         SwitchPanel(HomePanel); // Switch to Home Panel
+                        audioManager.PlaySound(loginSound);
                     }
                 });
 
@@ -249,6 +254,7 @@ public class PanelManager : MonoBehaviour
                 LoadUserProfile(user.UserId);
 
                 SwitchPanel(HomePanel); // Switch to Home Panel
+                audioManager.PlaySound(loginSound);
             }
         });
     }
@@ -315,7 +321,7 @@ public class PanelManager : MonoBehaviour
         SaveUserProfile();
         FirebaseAuth.DefaultInstance.SignOut();
         Debug.Log("User logged out.");
-
+        audioManager.PlaySound(logoutSound);
 
         loginEmailInput.text = "";
         loginPassInput.text = "";

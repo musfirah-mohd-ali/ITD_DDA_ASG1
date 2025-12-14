@@ -5,14 +5,15 @@ using TMPro;
 public class SpawnerManager : MonoBehaviour
 {
     public GameObject lockedText;
+    public AudioManager audioManager;
+    public AudioClip spawnSound;
 
-
-    // 🔘 BUTTON CALLS THIS
+    // Attempt to spawn a collectible prefab
     public void TrySpawn(GameObject prefab)
     {
         if (prefab == null) return;
 
-        CollectibleIdentity identity = prefab.GetComponent<CollectibleIdentity>(); // Get the identity component
+        CollectibleIdentity identity = prefab.GetComponent<CollectibleIdentity>(); // Get the identity component from the connected prefab
 
         if (identity == null)
         {
@@ -20,11 +21,10 @@ public class SpawnerManager : MonoBehaviour
             return;
         }
 
-        bool isUnlocked = CheckOwnership(identity.type); // Check if user owns this collectible
-
+        bool isUnlocked = CheckOwnership(identity.type); // Check if user owns this collectible, based on its type
         if (!isUnlocked)
         {
-            StartCoroutine(ShowLockedMessage());
+            StartCoroutine(ShowLockedMessage()); // Show locked message if not owned
             return;
         }
 
@@ -78,4 +78,4 @@ public class SpawnerManager : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         lockedText.SetActive(false);
     }
-}
+}   
