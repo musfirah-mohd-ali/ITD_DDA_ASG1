@@ -145,16 +145,48 @@ section {
     box-shadow: 0 8px 0 var(--secondary-color);
 }
 
-.collectible img {
-    width: 100%;
-    max-height: 100px;
-    object-fit: contain;
+/* * PERFECT CIRCLE IMAGE STYLES (Method 1: Padding Hack)
+* This requires wrapping the <img> in a <div class="collectible-circle"> 
+*/
+.collectible-circle {
+    /* Step 1: Set the width (e.g., 80% of the parent collectible box) */
+    width: 80%; 
+    /* Step 2: Center the circle horizontally */
+    margin: 0 auto 15px; /* Added margin-bottom to separate circle from text */
+    
+    /* Step 3: THE HACK - Set vertical padding to 100% of the width to force 1:1 ratio */
+    padding-bottom: 100%; 
+    
+    /* Step 4: Create the perfect circle shape */
     border-radius: 50%;
-    border: 4px solid var(--primary-color);
-    padding: 5px;
-    margin-bottom: 10px;
-    background-color: var(--secondary-color);
+    
+    /* Step 5: Setup for positioning the image inside */
+    position: relative;
+    
+    /* Apply your visual styles */
+    border: 4px solid var(--primary-color); /* The yellow border */
+    background-color: var(--secondary-color); /* The black background inside the circle */
 }
+
+.collectible-circle img {
+    /* Image sizing and positioning */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Ensure image fits without stretching */
+    object-fit: contain; 
+    
+    /* Reset borders/padding */
+    border-radius: 50%; 
+    border: none;
+    padding: 10px; /* Padding for the image content *inside* the black circle */
+    margin: 0;
+}
+/* * END PERFECT CIRCLE IMAGE STYLES 
+*/
 
 .collectible p {
     font-size: 1.1em;
@@ -166,7 +198,8 @@ section {
 
 .main-btn,
 .back-btn,
-#loginForm button {
+#loginForm button,
+#signupForm button {
     display: inline-block;
     padding: 12px 30px;
     margin: 20px auto 0;
@@ -185,14 +218,16 @@ section {
 
 .main-btn:hover,
 .back-btn:hover,
-#loginForm button:hover {
+#loginForm button:hover,
+#signupForm button:hover {
     background-color: #333333;
     box-shadow: 0 7px 0 #111111;
 }
 
 .main-btn:active,
 .back-btn:active,
-#loginForm button:active {
+#loginForm button:active,
+#signupForm button:active {
     transform: translateY(7px);
     box-shadow: 0 0 0;
 }
@@ -212,7 +247,7 @@ section {
 /* Profile/Login Form Input Styling */
 
 .centered-form {
-    max-width: 450px; 
+    max-width: 500px; /* INCREASED WIDTH for the taller signup form */
     margin-left: auto;
     margin-right: auto;
     text-align: center;
