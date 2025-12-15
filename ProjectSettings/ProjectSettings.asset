@@ -929,11 +929,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 9910f9ce-05b1-4091-a540-d6f6af8e1920
+  cloudProjectId: 651f0998-e5da-4e35-908d-0d4ed3faefba
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: ITD_DDA_ASG1
-  organizationId: musfirah15
+  projectName: ITD.DDA.ASG1
+  organizationId: alcomi
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
