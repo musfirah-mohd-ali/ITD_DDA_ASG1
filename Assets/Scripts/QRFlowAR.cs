@@ -26,6 +26,7 @@ public class QRFlow : MonoBehaviour
     private bool qrDetected = false;
     private GameObject currentGiftBox;
 
+    // Initializes the scene by hiding the open and collect buttons
     void Start()
     {
         if (openButton != null)
@@ -35,16 +36,19 @@ public class QRFlow : MonoBehaviour
             collectButton.SetActive(false);
     }
 
+    // Subscribes to the tracked images changed event when the script is enabled
     void OnEnable()
     {
         trackedImageManager.trackedImagesChanged += OnImageChanged;
     }
 
+    // Unsubscribes from the tracked images changed event when the script is disabled
     void OnDisable()
     {
         trackedImageManager.trackedImagesChanged -= OnImageChanged;
     }
 
+    // Handles changes in tracked images, processing added and updated images
     private void OnImageChanged(ARTrackedImagesChangedEventArgs args)
     {
         foreach (var trackedImage in args.added)
@@ -54,6 +58,7 @@ public class QRFlow : MonoBehaviour
             HandleQR(trackedImage);
     }
 
+    // Processes a tracked QR image, spawning a gift box if the QR is detected and not already handled
     private void HandleQR(ARTrackedImage trackedImage)
     {
         if (trackedImage.referenceImage.name != "ockQR") return;
@@ -80,6 +85,7 @@ public class QRFlow : MonoBehaviour
         }
     }
 
+    // Opens the gift box, spawns a random collectible and confetti, then destroys the gift box
     public void OpenGift()
     {
         if (currentGiftBox == null) return;
@@ -109,6 +115,7 @@ public class QRFlow : MonoBehaviour
             collectButton.SetActive(true);
     }
 
+    // Collects the spawned item, unlocks it in the panel manager, cleans up objects, and switches to home panel
     public void CollectItemButton()
     {
         if (currentCollectible == null) return;
