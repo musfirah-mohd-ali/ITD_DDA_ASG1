@@ -6,18 +6,18 @@ public class XRCollectible : MonoBehaviour
 {
     private UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable interactable;
 
+    // Initializes the XR interactable component and sets up the listener for when the object is collected
     void Awake()
     {
         interactable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable>();
-        // Subscribe to the new event
         interactable.selectEntered.AddListener(OnCollected);
     }
 
+    // Handles the collection event by logging the collection and destroying the collectible object
     private void OnCollected(SelectEnterEventArgs args)
     {
         Debug.Log(gameObject.name + " collected!");
 
-        // TODO: Save collectible to JSON/Firebase if needed
 
         Destroy(gameObject); // Remove collectible
     }
